@@ -1,11 +1,10 @@
-import time
 import requests
 import datetime as DT
 from flask import Flask, jsonify
 
 app = Flask(__name__)
 
-@app.route('/time')
+@app.route('/data')
 def get_current_time():
   base_url = 'https://api.coincap.io/v2'
   n_cryptos = 7
