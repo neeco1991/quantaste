@@ -1,10 +1,20 @@
 import requests
 import datetime as DT
 from flask import Flask, jsonify
+from flask_caching import Cache
 
 app = Flask(__name__)
 
-@app.route('/data')
+config = {
+    "DEBUG": True,          
+    "CACHE_TYPE": "SimpleCache", 
+    "CACHE_DEFAULT_TIMEOUT": 300
+}
+app.config.from_mapping(config)
+cache = Cache(app)
+
+@app.route('/api/data')
+@cache.cached(timeout=3600)
 def get_current_time():
   base_url = 'https://api.coincap.io/v2'
   n_cryptos = 7
