@@ -1,4 +1,4 @@
-interface Currency {
+export interface Currency {
   changePercent24Hr: string;
   explorer: string;
   id: string;
@@ -14,7 +14,7 @@ interface Currency {
   histo: Histo[];
 }
 
-interface Histo {
+export interface Histo {
   date: string;
   priceUsd: string;
   time: number;
