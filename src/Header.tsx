@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Key, SortOrder } from './Table';
 
 type Props = { sortOrder: SortOrder; setSortOrder: Function };
@@ -34,7 +33,7 @@ export const Header = ({ sortOrder, setSortOrder }: Props) => {
   return (
     <div className="flex border-y-2 mt-5">
       <div
-        className="w-[200px] font-semibold cursor-pointer h-[50px] flex items-center"
+        className="w-[200px] font-bold cursor-pointer h-[50px] flex items-center"
         onClick={() => {
           sort('name');
         }}
@@ -43,7 +42,7 @@ export const Header = ({ sortOrder, setSortOrder }: Props) => {
         {getArrow('name')}
       </div>
       <div
-        className="w-[200px] font-semibold cursor-pointer h-[50px] flex items-center justify-end"
+        className="w-[200px] font-bold cursor-pointer h-[50px] flex items-center justify-end"
         onClick={() => {
           sort('priceUsd');
         }}
@@ -52,7 +51,7 @@ export const Header = ({ sortOrder, setSortOrder }: Props) => {
         {getArrow('priceUsd')}
       </div>
       <div
-        className="w-[200px] font-semibold cursor-pointer h-[50px] flex items-center justify-center"
+        className="w-[200px] font-bold cursor-pointer h-[50px] flex items-center justify-center"
         onClick={() => {
           sort('changePercent24Hr');
         }}
@@ -61,7 +60,7 @@ export const Header = ({ sortOrder, setSortOrder }: Props) => {
         {getArrow('changePercent24Hr')}
       </div>
       <div
-        className="w-[200px] font-semibold cursor-pointer h-[50px] flex items-center"
+        className="w-[200px] font-bold cursor-pointer h-[50px] flex items-center"
         onClick={() => {
           sort('marketCapUsd');
         }}
@@ -70,7 +69,7 @@ export const Header = ({ sortOrder, setSortOrder }: Props) => {
         {getArrow('marketCapUsd')}
       </div>
       <div
-        className="w-[200px] font-semibold cursor-pointer h-[50px] flex items-center"
+        className="w-[200px] font-bold cursor-pointer h-[50px] flex items-center"
         onClick={() => {
           sort('volumeUsd24Hr');
         }}
@@ -78,7 +77,7 @@ export const Header = ({ sortOrder, setSortOrder }: Props) => {
         Volume (24h)
         {getArrow('volumeUsd24Hr')}
       </div>
-      <div className="w-[250px] font-semibold h-[50px] flex items-center justify-center">
+      <div className="w-[250px] font-bold h-[50px] flex items-center justify-center">
         Last 7 days
       </div>
     </div>

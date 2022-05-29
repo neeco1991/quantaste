@@ -28,7 +28,7 @@ export const Table = ({ data }: Props) => {
       <Header sortOrder={sortOrder} setSortOrder={setSortOrder} />
       {data.sort(sortFunction(sortOrder)).map((currency, index) => (
         <div
-          className={`flex ${getBorder(index, data.length)}`}
+          className={`flex ${getBorder(index, data.length)} `}
           key={currency.id}
         >
           <div className="w-[200px] h-[132px] flex items-center font-semibold">
@@ -37,11 +37,11 @@ export const Table = ({ data }: Props) => {
               {currency.symbol}
             </div>
           </div>
-          <div className="w-[200px] h-[132px] flex items-center justify-end">
+          <div className="w-[200px] h-[132px] flex items-center justify-end font-semibold">
             {(+currency.priceUsd).toFixed(2)}
           </div>
           <div
-            className={`w-[200px] h-[132px] flex items-center justify-center ${
+            className={`w-[200px] h-[132px] flex items-center justify-center font-semibold ${
               +currency.changePercent24Hr > 0
                 ? 'text-green-500'
                 : 'text-red-500'
@@ -52,10 +52,10 @@ export const Table = ({ data }: Props) => {
               {(+currency.changePercent24Hr).toFixed(2)}%
             </div>
           </div>
-          <div className="w-[200px] h-[132px] flex items-center">
+          <div className="w-[200px] h-[132px] flex items-center font-semibold">
             {parseBigNumber(currency.marketCapUsd)}
           </div>
-          <div className="w-[200px] h-[132px] flex items-center">
+          <div className="w-[200px] h-[132px] flex items-center font-semibold">
             {parseBigNumber(currency.volumeUsd24Hr)}
           </div>
           <div className="w-[250px] h-[132px] flex items-center">
