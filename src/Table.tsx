@@ -10,7 +10,8 @@ export type Key =
   | 'name'
   | 'priceUsd'
   | 'changePercent24Hr'
-  | 'volumeUsd24Hr';
+  | 'volumeUsd24Hr'
+  | 'rank';
 
 export interface SortOrder {
   key: Key;
@@ -19,8 +20,8 @@ export interface SortOrder {
 
 export const Table = ({ data }: Props) => {
   const [sortOrder, setSortOrder] = useState<SortOrder>({
-    key: 'marketCapUsd',
-    order: +1,
+    key: 'rank',
+    order: -1,
   });
 
   return (
@@ -31,6 +32,9 @@ export const Table = ({ data }: Props) => {
           className={`flex ${getBorder(index, data.length)} `}
           key={currency.id}
         >
+          <div className="w-[50px] h-[132px] flex items-center font-semibold">
+            {currency.rank}
+          </div>
           <div className="w-[200px] h-[132px] flex items-center font-semibold">
             {currency.name}
             <div className="ml-1 text-gray-300 uppercase">
@@ -96,7 +100,8 @@ const sortFunction = (sortOrder: SortOrder) => {
     key === 'priceUsd' ||
     key === 'marketCapUsd' ||
     key === 'volumeUsd24Hr' ||
-    key === 'changePercent24Hr'
+    key === 'changePercent24Hr' ||
+    key === 'rank'
   ) {
     return order > 0
       ? (a: Currency, b: Currency) => +b[key] - +a[key]

@@ -29,7 +29,9 @@ def get_current_time():
   
   for currency in currencies:
     id = currency['id']
-    histo_response = requests.get(f'{base_url}/assets/{id}/history?interval=h1&end={today}&start={one_week_ago}')
+    histo_response = requests.get(
+      f'{base_url}/assets/{id}/history?interval=h1&end={today}&start={one_week_ago}'
+    )
     currency['histo'] = histo_response.json()['data']
 
   return jsonify(currencies)

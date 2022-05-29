@@ -33,6 +33,14 @@ export const Header = ({ sortOrder, setSortOrder }: Props) => {
   return (
     <div className="flex border-y-2 mt-5">
       <div
+        className="w-[50px] font-bold cursor-pointer h-[50px] flex items-center"
+        onClick={() => {
+          sort('rank');
+        }}
+      >
+        #{getArrow('rank')}
+      </div>
+      <div
         className="w-[200px] font-bold cursor-pointer h-[50px] flex items-center"
         onClick={() => {
           sort('name');
