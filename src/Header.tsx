@@ -1,16 +1,34 @@
 import { useState } from 'react';
-import { Key } from './Table';
+import { Key, SortOrder } from './Table';
 
-type Props = { sort: Function };
+type Props = { sortOrder: SortOrder; setSortOrder: Function };
 
-export const Header = ({ sort }: Props) => {
-  const [selectedKey, setSelectedKey] = useState<Key>('marketCapUsd');
-
+export const Header = ({ sortOrder, setSortOrder }: Props) => {
   const getArrow = (name: Key) => {
-    if (name === selectedKey) {
-      return <div className="mr-1">&#9660;</div>;
+    if (name === sortOrder.key) {
+      return sortOrder.order > 0 ? (
+        <div className="mr-1">&#9660;</div>
+      ) : (
+        <div className="mr-1">&#9650;</div>
+      );
     }
     return;
+  };
+
+  const sort = (key: Key) => {
+    if (sortOrder.key === key) {
+      const newState = {
+        key,
+        order: sortOrder.order * -1,
+      };
+      setSortOrder(newState);
+    } else {
+      const newState = {
+        key,
+        order: +1,
+      };
+      setSortOrder(newState);
+    }
   };
 
   return (
@@ -18,7 +36,6 @@ export const Header = ({ sort }: Props) => {
       <div
         className="w-[200px] font-semibold cursor-pointer h-[50px] flex items-center"
         onClick={() => {
-          setSelectedKey('name');
           sort('name');
         }}
       >
@@ -28,7 +45,6 @@ export const Header = ({ sort }: Props) => {
       <div
         className="w-[200px] font-semibold cursor-pointer h-[50px] flex items-center justify-end"
         onClick={() => {
-          setSelectedKey('priceUsd');
           sort('priceUsd');
         }}
       >
@@ -38,7 +54,6 @@ export const Header = ({ sort }: Props) => {
       <div
         className="w-[200px] font-semibold cursor-pointer h-[50px] flex items-center justify-center"
         onClick={() => {
-          setSelectedKey('changePercent24Hr');
           sort('changePercent24Hr');
         }}
       >
@@ -48,7 +63,6 @@ export const Header = ({ sort }: Props) => {
       <div
         className="w-[200px] font-semibold cursor-pointer h-[50px] flex items-center"
         onClick={() => {
-          setSelectedKey('marketCapUsd');
           sort('marketCapUsd');
         }}
       >
@@ -58,7 +72,6 @@ export const Header = ({ sort }: Props) => {
       <div
         className="w-[200px] font-semibold cursor-pointer h-[50px] flex items-center"
         onClick={() => {
-          setSelectedKey('volumeUsd24Hr');
           sort('volumeUsd24Hr');
         }}
       >

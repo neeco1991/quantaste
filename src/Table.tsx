@@ -12,21 +12,23 @@ export type Key =
   | 'changePercent24Hr'
   | 'volumeUsd24Hr';
 
+export interface SortOrder {
+  key: Key;
+  order: number;
+}
+
 export const Table = ({ data }: Props) => {
-  const [sortedData, setSortedData] = useState<Response>(data);
-
-  useEffect(() => setSortedData(data), [data]);
-
-  const sort = (key: Key) => {
-    setSortedData([...data.sort(sortFunction(key))]);
-  };
+  const [sortOrder, setSortOrder] = useState<SortOrder>({
+    key: 'marketCapUsd',
+    order: +1,
+  });
 
   return (
     <div>
-      <Header sort={sort} />
-      {sortedData.map((currency, index) => (
+      <Header sortOrder={sortOrder} setSortOrder={setSortOrder} />
+      {data.sort(sortFunction(sortOrder)).map((currency, index) => (
         <div
-          className={`flex ${getBorder(index, sortedData.length)}`}
+          className={`flex ${getBorder(index, data.length)}`}
           key={currency.id}
         >
           <div className="w-[200px] h-[132px] flex items-center font-semibold">
@@ -88,9 +90,19 @@ const getBorder = (index: number, length: number) => {
   return `border-t-2`;
 };
 
-const sortFunction = (key: Key) => {
-  if (key === 'priceUsd' || key === 'marketCapUsd' || key === 'volumeUsd24Hr') {
-    return (a: Currency, b: Currency) => +b[key] - +a[key];
+const sortFunction = (sortOrder: SortOrder) => {
+  const { key, order } = sortOrder;
+  if (
+    key === 'priceUsd' ||
+    key === 'marketCapUsd' ||
+    key === 'volumeUsd24Hr' ||
+    key === 'changePercent24Hr'
+  ) {
+    return order > 0
+      ? (a: Currency, b: Currency) => +b[key] - +a[key]
+      : (a: Currency, b: Currency) => +a[key] - +b[key];
   }
-  return (a: Currency, b: Currency) => a[key].localeCompare(b[key]);
+  return order > 0
+    ? (a: Currency, b: Currency) => a[key].localeCompare(b[key])
+    : (a: Currency, b: Currency) => b[key].localeCompare(a[key]);
 };
